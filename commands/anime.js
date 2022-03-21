@@ -16,28 +16,26 @@ module.exports = async function (msg, args) {
     .then(async (response) => {
       console.log(response.data);
       if (response.data.length !== 0) {
-        let results = response.data[0];
+        let results = response.data;
         // const row = new MessageActionRow().addComponents(
         //   new MessageButton().setCustomId("1").setLabel("1").setStyle("PRIMARY")
         // );
-        const embed = new MessageEmbed()
+        let embed = new MessageEmbed()
           .setColor("#0099ff")
           .setTitle("Anime Results")
           .setURL("https://discord.js.org")
-          .setDescription(
-            `${results["show"]["name"]} - EP${results["next_ep"]["number"]}: ${
-              results["next_ep"]["name"]
-            } - airs ${dayjs(results["next_ep"]["airstamp"]).from(dayjs())}`
-          );
+          .setDescription("Credits: TVmaze API");
+        for (item of results) {
+          let name = item["show"]["name"];
+          let epName = item["next_ep"]["name"];
+          let epNum = item["next_ep"]["number"];
+          let airtime = item["next_ep"]["airstamp"];
+          embed.addField(name, `EP${epNum} - "${epName}" airs ${dayjs(airtime).from(dayjs())}`);
+        }
         msg.reply({ ephemeral: true, embeds: [embed] });
         console.log(results);
       } else {
         msg.reply("Sorry, couldn't find anything ;-;");
       }
     });
-
-  // console.log("sanity check");
-  // let url = "http://localhost:3000/animes";
-  // let response = await axios.get(url);
-  // let json = await response.data;
 };

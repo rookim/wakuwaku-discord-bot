@@ -5,9 +5,11 @@ const gif = require("./commands/gif.js");
 const deez = require("./commands/deez.js");
 const ping = require("./commands/ping.js");
 const anime = require("./commands/anime.js");
+const ww = require("./commands/ww.js");
+const byte = require("./commands/byte.js");
 
 // enhanced object literals? when property and value have the same name
-let commands = { pom, hi, gif, deez, ping, anime };
+let commands = { pom, hi, gif, deez, ping, anime, ww, byte };
 
 // module.exports is how data is exported so that you can make use of require() in other files
 module.exports = async function (msg) {
@@ -39,6 +41,12 @@ module.exports = async function (msg) {
         break;
       case "anime":
         commands[command](msg, args);
+        break;
+      case "ww":
+        commands[command](msg, args);
+        break;
+      case "byte":
+        commands[command](msg);
         break;
       default:
         // can't reference objects here?? only functions?
