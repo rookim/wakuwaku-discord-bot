@@ -16,7 +16,7 @@ module.exports = async function (msg, args) {
     .then(async (response) => {
       console.log(response.data);
       if (response.data.message === "User not found") {
-        msg.reply("Sorry, couldn't find anything ;-; Remember, usernames are case-sensitive!");
+        msg.reply("Sorry, couldn't find a user by that name ;-; Remember, usernames are case-sensitive!");
       } else {
         let results = response.data;
         if (results.length === 0) {
