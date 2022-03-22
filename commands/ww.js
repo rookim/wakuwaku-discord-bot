@@ -33,11 +33,17 @@ module.exports = async function (msg, args) {
             .setTitle(`${args}'s wakuwaku Watchlist`)
             .setURL("https://discord.js.org");
           for (item of results) {
-            let name = item["show"]["name"];
-            let epName = item["show"]["next_ep"]["name"];
-            let epNum = item["show"]["next_ep"]["number"];
-            let airtime = item["show"]["next_ep"]["airstamp"];
-            embed.addField(name, `EP${epNum} - "${epName}" airs ${dayjs(airtime).from(dayjs())}`);
+            // check to see if next_ep info exists
+            if (item["show"]["next_ep"]) {
+              let name = item["show"]["name"];
+              let epName = item["show"]["next_ep"]["name"];
+              let epNum = item["show"]["next_ep"]["number"];
+              let airtime = item["show"]["next_ep"]["airstamp"];
+              embed.addField(name, `EP${epNum} - "${epName}" airs ${dayjs(airtime).from(dayjs())}`);
+            } else {
+              let name = item["show"]["name"];
+              embed.addField(name, "Next episode information unavailable");
+            }
           }
           msg.reply({ ephemeral: true, embeds: [embed] });
         }
