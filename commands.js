@@ -1,4 +1,5 @@
 const axios = require("axios");
+const botPrefix = ".";
 const hi = require("./commands/hi.js");
 const pom = require("./commands/pom.js");
 const gif = require("./commands/gif.js");
@@ -15,7 +16,9 @@ let commands = { pom, hi, gif, deez, ping, anime, ww, byte };
 module.exports = async function (msg) {
   // if statement so that bot only responds to commands in wakuwaku channel
   // also added startsWith(".") method because otherwise, the default block would induce an infinite loop (the bot basically responding itself!!). basically telling the bot to only reply when there is a period at the start of the command. (known as a prefix)
-  if (msg.channel.id == process.env.CHANNEL_ID && msg.content.startsWith(".")) {
+
+  // future reference, syntax to have it listen for a specific channel: msg.channel.id == process.env.CHANNEL_ID
+  if (msg.content.startsWith(botPrefix)) {
     let args = msg.content.split(" ");
     // remove first element from args array
     let command = args.shift();
