@@ -8,7 +8,7 @@ dayjs().format();
 
 module.exports = async function (msg, args) {
   axios
-    .get("http://localhost:3000/animes", {
+    .get("https://waku-waku.herokuapp.com/animes", {
       params: {
         title: args,
       },
