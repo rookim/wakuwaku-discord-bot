@@ -5,6 +5,5 @@ module.exports = async function (msg, args) {
   let response = await axios.get(url);
   let json = await response.data;
   let index = Math.floor(Math.random() * json.results.length);
-  msg.reply(json.results[index].url);
-  msg.channel.send("🔗: Tenor GIFs");
+  msg.reply(`🔗Tenor GIFs: ${json.results[index].url}`);
 };
