@@ -1,4 +1,4 @@
-// import dotenv module. config method tells this file to load value from .env file
+// import dotenv module. config method tells this file to load value into process.env variable from .env file
 require("dotenv").config();
 const { Client, Intents } = require("discord.js");
 
